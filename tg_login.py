@@ -1,8 +1,10 @@
 from telethon.sync import TelegramClient
 from telethon.errors import SessionPasswordNeededError
+import os
 
-api_id = 22121656
-api_hash = '2f92474dd31878529f02526f7180d624'
+# === Paramètres ===
+api_id = 22121656  # Remplace avec ton propre api_id
+api_hash = '2f92474dd31878529f02526f7180d624'  # Remplace avec ton propre api_hash
 session_name = 'session'
 
 def connect_and_send():
@@ -11,8 +13,19 @@ def connect_and_send():
     with client:
         if not client.is_user_authorized():
             phone = input("Entrez votre numéro de téléphone (ex: +261XXXXXXXXX): ")
-            client.send_code_request(phone)
-            code = input("Entrez le code reçu par Telegram ou SMS : ")
+            sent = client.send_code_request(phone)
+
+            # Afficher où le code a été envoyé
+            if sent.phone_code_hash:
+                print("\n[!] Un code a été envoyé.")
+                if sent._phone_code_type == 'app':
+                    print("-> Le code a été envoyé via l'application Telegram.")
+                elif sent._phone_code_type == 'sms':
+                    print("-> Le code a été envoyé par SMS.")
+                else:
+                    print("-> Vérifiez votre Telegram ou vos SMS.")
+            
+            code = input("Entrez le code reçu : ")
             try:
                 client.sign_in(phone, code)
             except SessionPasswordNeededError:
