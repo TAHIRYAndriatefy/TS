@@ -4,15 +4,19 @@
 clear
 echo -e "\e[1;36m"
 cat << "EOF"
+╔════════════════════════════════╗
+╚════════════════════════════════╝
          ████████╗  ███████╗
          ╚══██╔══╝  ██╔════╝
             ██║     ███████╗  
             ██║          ██║
             ██║     ███████║
             ╚═╝     ╚══════╝
+╔════════════════════════════════╗            
+╚════════════════════════════════╝
          TAHIRY TS - Termux Tools
-      Ity dia outil iray azonao instalé
-              amin'ny termux 
+"Ity dia outil iray azonao instalé"
+         amin'ny termux"
 EOF
 echo -e "\e[0m"
 
@@ -33,6 +37,7 @@ while true; do
   echo "║ 2. Voir l'historique           ║"
   echo "║ 3. Mettre à jour le script     ║"
   echo "║ 4. Infos développeur           ║"
+  echo "║ 5. mettre a jour               ║"
   echo "║ 0. Quitter                     ║"
   echo "╚════════════════════════════════╝"
   echo -e "\e[0m"
@@ -67,6 +72,14 @@ while true; do
       echo "Facebook 2: https://www.facebook.com/profile.php?id=61553657020034"
       echo "Email: tahiryandriatefy52@gmail.com"
       ;;
+     5) mettre_a_jour() {
+      echo -e "\n\033[1;34m[~] Mise à jour du script TS...\033[0m"
+      cd ~/TS || { echo "Dossier TS introuvable !"; return; }
+      git pull && chmod +x TS.sh && cp TS.sh $PREFIX/bin/ts
+      echo -e "\n\033[1;32m[✓] Mise à jour terminée avec succès !\033[0m"
+     sleep 2
+      }
+      mettre a jour 5
     0)
       exit 0
       ;;
