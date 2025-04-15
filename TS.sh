@@ -36,14 +36,14 @@ done
 
 # === Boutons Contact développeur dans un cadre ===
 echo -e "\e[1;33m"
-echo "╔════════════════════════════════╗"
-echo "║       CONTACT DÉVELOPPEUR      ║"
-echo "╠════════════════════════════════╣"
-echo "║ [1] Facebook 1                 ║"
-echo "║ [2] Facebook 2                 ║"
-echo "║ [3] Email                      ║"
-echo "║ [0] Ignorer                    ║"
-echo "╚════════════════════════════════╝"
+echo        "╔════════════════════════════════╗"
+echo        "║       CONTACT DÉVELOPPEUR      ║"
+echo        "╠════════════════════════════════╣"
+echo        "║ [1] Facebook 1                 ║"
+echo        "║ [2] Facebook 2                 ║"
+echo        "║ [3] Email                      ║"
+echo        "║ [0] Ignorer                    ║"
+echo        "╚════════════════════════════════╝"
 echo -e "\e[0m"
 read -p "Choisissez une option de contact : " contact
 
@@ -74,26 +74,26 @@ configurer_telegram() {
 }
 
 mettre_a_jour() {
-  echo -e "\n\033[1;34m[~] Mise à jour du script TS...\033[0m"
+  echo -e "\n\033[1;34m[~] Manavao ilay script TS izahay...\033[0m"
   cd ~/TS || { echo "Dossier TS introuvable !"; return; }
   git pull && chmod +x TS.sh && cp TS.sh $PREFIX/bin/ts
-  echo -e "\n\033[1;32m[✓] Mise à jour terminée avec succès !\033[0m"
+  echo -e "\n\033[1;32m[✓] Vita soamatsara ny fanavaozana !\033[0m"
   sleep 2
 }
 
 while true; do
   echo -e "\e[1;32m"
-  echo "╔════════════════════════════════╗"
-  echo "║         MENU PRINCIPAL         ║"
-  echo "╠════════════════════════════════╣"
-  echo "║ 1. Envoyer une commande SMM    ║"
-  echo "║ 2. Voir l'historique           ║"
-  echo "║ 3. Mise à jour rapide          ║"
-  echo "║ 4. Mise à jour complète        ║"
-  echo "║ 5. Connecter à Telegram (bot)  ║"
-  echo "║ 6. Connexion Telegram perso    ║"
-  echo "║ 0. Quitter                     ║"
-  echo "╚════════════════════════════════╝"
+  echo     "╔════════════════════════════════╗"
+  echo     "║         MENU PRINCIPAL         ║"
+  echo     "╠════════════════════════════════╣"
+  echo     "║ 1. Envoyer une commande SMM    ║"
+  echo     "║ 2. Voir l'historique           ║"
+  echo     "║ 3. Mise à jour rapide          ║"
+  echo     "║ 4. Mise à jour complète        ║"
+  echo     "║ 5. Connecter à Telegram (bot)  ║"
+  echo     "║ 6. Connexion Telegram perso    ║"
+  echo     "║ 0. Quitter                     ║"
+  echo     "╚════════════════════════════════╝"
   echo -e "\e[0m"
   read -p "Choix : " choix
 
@@ -109,14 +109,14 @@ while true; do
         echo "Non connecté à Telegram. Option 5."
       fi ;;
     2) [ -f ts_history.log ] && cat ts_history.log || echo "Aucun historique" ;;
-    3) echo "Mise à jour rapide..." && git pull && chmod +x TS.sh ;;
+    3) echo "Mahandrasa kely azafady..." && git pull && chmod +x TS.sh ;;
     4) mettre_a_jour ;;
     5) configurer_telegram ;;
     6)
-      echo -ne "Connexion à Telegram perso"
-      for i in {1..3}; do echo -n "."; sleep 0.5; done
+      echo -ne "Hiditra Telegram personnel"
+      for i in {1..9}; do echo -n "."; sleep 1.0; done
       python3 tg_login.py ;;
-    0) echo "Fermeture..." && exit 0 ;;
-    *) echo "Choix invalide." ;;
+    0) echo "Veloma eee..." && exit 0 ;;
+    *) echo "Diso ny safidinao !." ;;
   esac
 done
