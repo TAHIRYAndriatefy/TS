@@ -1,11 +1,9 @@
 from telethon.sync import TelegramClient
 from telethon.errors import SessionPasswordNeededError
-import os
 
-# === Paramètres ===
-api_id = 22121656  # Remplace avec ton propre api_id
-api_hash = '2f92474dd31878529f02526f7180d624'  # Remplace avec ton propre api_hash
-session_name = 'session'  # Fichier de session sauvegardé
+api_id = 22121656
+api_hash = '2f92474dd31878529f02526f7180d624'
+session_name = 'session'
 
 def connect_and_send():
     client = TelegramClient(session_name, api_id, api_hash)
