@@ -57,9 +57,7 @@ case $contact in
 esac
 
 # === Authentification ===
-read -p 
-"Hiditra.
-\n\033[1;34m]╚═════════════════Ampidiro ny kaody miafina: !\033[0m]" key
+read -p "Hiditra.\n\033[1;34m]╚═════════════════Ampidiro ny kaody miafina: !\033[0m]" key
 if [[ "$key" != "ts2025" ]]; then
   echo "Clé invalide."
   exit 1
