@@ -4,13 +4,15 @@
 clear
 echo -e "\e[1;36m"
 cat << "EOF"
-████████╗  ███████╗
-╚══██╔══╝  ██╔════╝
-   ██║     ███████╗  
-   ██║          ██║
-   ██║     ███████║
-   ╚═╝     ╚══════╝
-      TAHIRY TS - Termux Tools
+         ████████╗  ███████╗
+         ╚══██╔══╝  ██╔════╝
+            ██║     ███████╗  
+            ██║          ██║
+            ██║     ███████║
+            ╚═╝     ╚══════╝
+         TAHIRY TS - Termux Tools
+      Ity dia outil iray azonao instalé
+              amin'ny termux 
 EOF
 echo -e "\e[0m"
 
