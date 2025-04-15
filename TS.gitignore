@@ -1,0 +1,11 @@
+---
+
+### 3. Fichier `.gitignore`
+
+```gitignore
+# Ignorer les fichiers journaux, temporaires et de configuration locale
+*.log
+*.tmp
+.env
+__pycache__/
+.termux/
