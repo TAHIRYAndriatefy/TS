@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CONFIG_FILE="$HOME/.ts_config"
+
 # === Logo TS en ASCII ===
 clear
 echo -e "\e[1;36m"
@@ -26,11 +28,23 @@ if [[ "$key" != "ts2024" ]]; then
   exit 1
 fi
 
-# === Configuration Telegram (à personnaliser) ===
-TELEGRAM_TOKEN="TON_TOKEN"
-TELEGRAM_ID="TON_ID"
+# === Charger la configuration Telegram si elle existe ===
+if [[ -f $CONFIG_FILE ]]; then
+  source "$CONFIG_FILE"
+fi
 
-# === Fonction de mise à jour ===
+# === Sauvegarde configuration Telegram ===
+configurer_telegram() {
+  echo -e "\nConfiguration du compte Telegram :"
+  read -p "Entrer votre bot token Telegram : " TELEGRAM_TOKEN
+  read -p "Entrer votre chat ID Telegram : " TELEGRAM_ID
+
+  echo "TELEGRAM_TOKEN=\"$TELEGRAM_TOKEN\"" > "$CONFIG_FILE"
+  echo "TELEGRAM_ID=\"$TELEGRAM_ID\"" >> "$CONFIG_FILE"
+  echo -e "\n[✓] Configuration sauvegardée avec succès !"
+}
+
+# === Mise à jour complète ===
 mettre_a_jour() {
   echo -e "\n\033[1;34m[~] Mise à jour du script TS...\033[0m"
   cd ~/TS || { echo "Dossier TS introuvable !"; return; }
@@ -50,6 +64,7 @@ while true; do
   echo "║ 3. Mise à jour rapide          ║"
   echo "║ 4. Infos développeur           ║"
   echo "║ 5. Mise à jour complète        ║"
+  echo "║ 6. Connecter à Telegram        ║"
   echo "║ 0. Quitter                     ║"
   echo "╚════════════════════════════════╝"
   echo -e "\e[0m"
@@ -60,14 +75,11 @@ while true; do
       read -p "Entrez votre commande SMM (ex: Achat, Liker, etc.) : " cmd
       echo "$(date): $cmd" >> ts_history.log
       echo "Commande envoyée: $cmd"
-      
-      # === Envoi sur Telegram ===
+
       if [[ -n "$TELEGRAM_TOKEN" && -n "$TELEGRAM_ID" ]]; then
-        curl -s -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage \
-             -d chat_id=$TELEGRAM_ID \
-             -d text="Commande SMM Kingdom : $cmd" > /dev/null
+        curl -s -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage              -d chat_id=$TELEGRAM_ID              -d text="Commande SMM Kingdom : $cmd" > /dev/null
       else
-        echo "Token ou ID Telegram manquant."
+        echo "Vous n'êtes pas encore connecté à Telegram. Option 6."
       fi
       ;;
     2)
@@ -85,6 +97,9 @@ while true; do
       ;;
     5)
       mettre_a_jour
+      ;;
+    6)
+      configurer_telegram
       ;;
     0)
       echo "Fermeture du script..."
