@@ -1,0 +1,24 @@
+===================================
+         AIDE - SCRIPT TS
+===================================
+
+1. Envoyer une commande SMM
+   > Permet d'envoyer une commande personnalisée
+   > Elle sera enregistrée dans l'historique et envoyée au Bot Telegram (si connecté)
+
+2. Voir l'historique
+   > Affiche toutes les commandes SMM précédemment envoyées
+
+3. Mise à jour rapide
+   > Fait un 'git pull' et réactive les permissions sur TS.sh
+
+4. Mise à jour complète
+   > Vérifie et met à jour le script, puis l'installe dans le PATH
+
+5. Connecter à Telegram (Bot)
+   > Configurez votre Bot Telegram pour recevoir les commandes SMM
+
+0. Quitter
+   > Ferme proprement le script
+
+[Contact développeur visible au lancement]
