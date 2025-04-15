@@ -16,7 +16,8 @@ cat << "EOF"
                      ╚═╝     ╚══════╝
            ╔════════════════════════════════╗ 
            TAHIRY TS - Termux Tools"Ity dia 
-           outil iray azonao instalé amin'ny termux"
+           outil iray azonao instalé amin'ny 
+           termux"
            ╚════════════════════════════════╝
 EOF
 echo -e "\e[0m"
