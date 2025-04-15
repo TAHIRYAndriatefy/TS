@@ -4,20 +4,21 @@
 clear
 echo -e "\e[1;36m"
 cat << "EOF"
-████████╗ ███████╗
-╚══██╔══╝ ██╔════╝
+████████╗  ███████╗
+╚══██╔══╝  ██╔════╝
    ██║     ███████╗  
-   ██║           ██║
+   ██║          ██║
    ██║     ███████║
    ╚═╝     ╚══════╝
       TAHIRY TS - Termux Tools
-EOF
-echo -e "\e[0m"
 
 # Affichage centré du logo
 while IFS= read -r line; do
   printf "%*s\n" $(((${#line} + cols) / 2)) "$line"
 done <<< "$logo"
+
+EOF
+echo -e "\e[0m"
 
 # === Authentification ===
 read -p "Entrez la clé d'accès : " key
