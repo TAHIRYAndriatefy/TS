@@ -15,8 +15,7 @@ cat << "EOF"
 ╔════════════════════════════════╗            
 ╚════════════════════════════════╝
          TAHIRY TS - Termux Tools
-"Ity dia outil iray azonao instalé"
-         amin'ny termux"
+"Ity dia outil iray azonao instalé amin'ny termux"
 EOF
 echo -e "\e[0m"
 
@@ -27,7 +26,20 @@ if [[ "$key" != "ts2024" ]]; then
   exit 1
 fi
 
-# === Menu stylisé avec couleurs ===
+# === Configuration Telegram (à personnaliser) ===
+TELEGRAM_TOKEN="TON_TOKEN"
+TELEGRAM_ID="TON_ID"
+
+# === Fonction de mise à jour ===
+mettre_a_jour() {
+  echo -e "\n\033[1;34m[~] Mise à jour du script TS...\033[0m"
+  cd ~/TS || { echo "Dossier TS introuvable !"; return; }
+  git pull && chmod +x TS.sh && cp TS.sh $PREFIX/bin/ts
+  echo -e "\n\033[1;32m[✓] Mise à jour terminée avec succès !\033[0m"
+  sleep 2
+}
+
+# === MENU PRINCIPAL ===
 while true; do
   echo -e "\e[1;32m"
   echo "╔════════════════════════════════╗"
@@ -35,9 +47,9 @@ while true; do
   echo "╠════════════════════════════════╣"
   echo "║ 1. Envoyer une commande SMM    ║"
   echo "║ 2. Voir l'historique           ║"
-  echo "║ 3. Mettre à jour le script     ║"
+  echo "║ 3. Mise à jour rapide          ║"
   echo "║ 4. Infos développeur           ║"
-  echo "║ 5. mettre a jour               ║"
+  echo "║ 5. Mise à jour complète        ║"
   echo "║ 0. Quitter                     ║"
   echo "╚════════════════════════════════╝"
   echo -e "\e[0m"
@@ -45,45 +57,41 @@ while true; do
 
   case $choix in
     1)
-      # === Envoi d'une commande ===
-      read -p "Entrez votre commande SMM : " cmd
+      read -p "Entrez votre commande SMM (ex: Achat, Liker, etc.) : " cmd
       echo "$(date): $cmd" >> ts_history.log
       echo "Commande envoyée: $cmd"
-      # Envoi de la notification via Telegram (remplace TON_TOKEN et TON_ID)
-      curl -s -X POST https://api.telegram.org/botTON_TOKEN/sendMessage \
-           -d chat_id=TON_ID \
-           -d text="Commande TS : $cmd" > /dev/null
+      
+      # === Envoi sur Telegram ===
+      if [[ -n "$TELEGRAM_TOKEN" && -n "$TELEGRAM_ID" ]]; then
+        curl -s -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage \
+             -d chat_id=$TELEGRAM_ID \
+             -d text="Commande SMM Kingdom : $cmd" > /dev/null
+      else
+        echo "Token ou ID Telegram manquant."
+      fi
       ;;
     2)
-      # === Historique des commandes ===
       [ -f ts_history.log ] && cat ts_history.log || echo "Aucun historique"
       ;;
     3)
-      # === Mise à jour automatique du script ===
-      echo "Mise à jour en cours..."
-      git pull
-      chmod +x TS.sh
-      echo "Mise à jour terminée."
+      echo "Mise à jour rapide..."
+      git pull && chmod +x TS.sh
       ;;
     4)
-      # === Infos développeur ===
       echo "Développé par TAHIRY TS"
       echo "Facebook 1: https://www.facebook.com/profile.php?id=61553579523412"
       echo "Facebook 2: https://www.facebook.com/profile.php?id=61553657020034"
       echo "Email: tahiryandriatefy52@gmail.com"
       ;;
-     5) mettre_a_jour() {
-      echo -e "\n\033[1;34m[~] Mise à jour du script TS...\033[0m"
-      cd ~/TS || { echo "Dossier TS introuvable !"; return; }
-      git pull && chmod +x TS.sh && cp TS.sh $PREFIX/bin/ts
-      echo -e "\n\033[1;32m[✓] Mise à jour terminée avec succès !\033[0m"
-     sleep 2
-      }
-      mettre a jour 5
+    5)
+      mettre_a_jour
+      ;;
     0)
+      echo "Fermeture du script..."
       exit 0
       ;;
     *)
-      echo "Choix invalide." ;;
+      echo "Choix invalide."
+      ;;
   esac
 done
