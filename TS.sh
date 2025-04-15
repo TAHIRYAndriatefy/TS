@@ -11,12 +11,6 @@ cat << "EOF"
    ██║     ███████║
    ╚═╝     ╚══════╝
       TAHIRY TS - Termux Tools
-
-# Affichage centré du logo
-while IFS= read -r line; do
-  printf "%*s\n" $(((${#line} + cols) / 2)) "$line"
-done <<< "$logo"
-
 EOF
 echo -e "\e[0m"
 
