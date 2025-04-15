@@ -25,8 +25,9 @@ logo=(
 "                     ██║     ███████║"
 "                     ╚═╝     ╚══════╝"
 "           ╔════════════════════════════════╗"
-"           TAHIRY TS - Termux Tools"
-"           Ity dia outil iray azonao instalé amin'ny termux"
+"                   TAHIRY TS - Termux Tools"
+"           Ity dia outil iray azonao instalé
+             amin'ny termux"
 "           ╚════════════════════════════════╝"
 )
 for line in "${logo[@]}"; do
@@ -45,19 +46,21 @@ echo        "║ [3] Email                      ║"
 echo        "║ [0] Ignorer                    ║"
 echo        "╚════════════════════════════════╝"
 echo -e "\e[0m"
-read -p "Choisissez une option de contact : " contact
+read -p "Misafidiana isa mba hidirana : " contact
 
 case $contact in
   1) am start -a android.intent.action.VIEW -d "https://www.facebook.com/profile.php?id=61553579523412" >/dev/null 2>&1 ;;
   2) am start -a android.intent.action.VIEW -d "https://www.facebook.com/profile.php?id=61553657020034" >/dev/null 2>&1 ;;
   3) am start -a android.intent.action.SENDTO -d "mailto:tahiryandriatefy52@gmail.com" >/dev/null 2>&1 ;;
-  0) echo "Ok, on continue..." ;;
-  *) echo "Choix invalide. On continue..." ;;
+  0) echo "Ok, ndao hanohy ..." ;;
+  *) echo "Diso ilay safidinao.fa tsy maninona ndao hotohizana ..." ;;
 esac
 
 # === Authentification ===
-read -p "Connexion - Entrez la clé d'accès : " key
-if [[ "$key" != "ts2024" ]]; then
+read -p 
+"Hiditra.
+\n\033[1;34m╚═════════════════Ampidiro ny kaody miafina: !\033[0m" key
+if [[ "$key" != "ts2025" ]]; then
   echo "Clé invalide."
   exit 1
 fi
@@ -70,7 +73,7 @@ configurer_telegram() {
   read -p "Entrer votre chat ID Telegram : " TELEGRAM_ID
   echo "TELEGRAM_TOKEN=\"$TELEGRAM_TOKEN\"" > "$CONFIG_FILE"
   echo "TELEGRAM_ID=\"$TELEGRAM_ID\"" >> "$CONFIG_FILE"
-  echo -e "\n[✓] Configuration sauvegardée avec succès !"
+  echo -e "\n[✓] Tafiditra soamatsara ilay momba !"
 }
 
 mettre_a_jour() {
@@ -91,7 +94,7 @@ while true; do
   echo     "║ 3. Mise à jour rapide          ║"
   echo     "║ 4. Mise à jour complète        ║"
   echo     "║ 5. Connecter à Telegram (bot)  ║"
-  echo     "║ 6. Connexion Telegram perso    ║"
+  echo     "║ 6. Connexion Telegram personnel ║"
   echo     "║ 0. Quitter                     ║"
   echo     "╚════════════════════════════════╝"
   echo -e "\e[0m"
