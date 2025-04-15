@@ -1,6 +1,22 @@
 # TS - Script Professionnel pour Termux
 
-![Logo TS](https://via.placeholder.com/400x100.png?text=TS+by+TAHIRY+TS)
+![Logo TS](clear
+cols=$(tput cols)
+logo=$(cat << "EOF"
+████████╗███████╗
+╚══██╔══╝██╔════╝
+   ██║   █████╗  
+   ██║   ██╔══╝  
+   ██║   ███████╗
+   ╚═╝   ╚══════╝
+      TAHIRY TS
+EOF
+)
+
+# Affichage centré du logo
+while IFS= read -r line; do
+  printf "%*s\n" $(((${#line} + cols) / 2)) "$line"
+done <<< "$logo")
 
 ## Présentation
 TS est un script avancé conçu pour Termux, permettant d’exécuter des commandes SMM (Social Media Marketing) de manière rapide et sécurisée. Il intègre :
