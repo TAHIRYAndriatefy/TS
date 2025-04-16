@@ -40,6 +40,19 @@ for line in "${logo[@]}"; do
   echo -e "\e[1;36m$line\e[0m"
   sleep 0.1
 done
+# === Horloge en temps réel sous le logo (10 secondes) ===
+echo -e "\n\e[1;35m       Manomboka ny horloge...\e[0m"
+for i in {1..10}; do
+  clear
+  for line in "${logo[@]}"; do
+    echo -e "\e[1;36m$line\e[0m"
+    sleep 0.05
+  done
+  echo ""
+  date '+%H:%M:%S' | figlet | lolcat
+  sleep 1
+done
+clear
 
 # === Boutons Contact développeur dans un cadre ===
 echo -e "\e[1;33m"
@@ -63,6 +76,7 @@ case $contact in
 esac
 
 # === Authentification ===
+
 read -p "Hiditra.╚═════════════════Ampidiro ny kaody miafina:" key
 if [[ "$key" != "ts2025" ]]; then
   echo "Clé invalide."
@@ -118,13 +132,16 @@ while true; do
       fi ;;
     2) [ -f ts_history.log ] && cat ts_history.log || echo "Aucun historique" ;;
     3) echo "Mahandrasa kely azafady..." && git pull && chmod +x TS.sh ;;
-    4) mettre_a_jour ;;
+    4) read -p "mettre à jour : " cmd
+  echo "[$(date '+%H:%M:%S')] $cmd" >> ts_history.log
+    mettre_a_jour ;;
     5) configurer_telegram ;;
     6)
       echo -ne "Hiditra Telegram personnel"
       for i in {1._._._._.9}; do echo -n "._."; sleep 1.0; done
       python3 tg_login.py ;;
-    7) 
+    7)read -p "mandeha hoazy : " cmd
+    echo "[$(date '+%H:%M:%S')] $cmd" >> ts_history.log
     echo -ne "Mandeha hoazy"
     for i in {1._._._._.9}; do echo -n "__" ; sleep 1.0; done 
     python3 smm_auto.py
