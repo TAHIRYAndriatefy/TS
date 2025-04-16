@@ -40,6 +40,29 @@ for line in "${logo[@]}"; do
   echo -e "\e[1;36m$line\e[0m"
   sleep 0.1
 done
+# === Affichage du logo une seule fois ===
+clear
+for line in "${logo[@]}"; do
+  echo -e "\e[1;36m$line\e[0m"
+  sleep 0.03
+done
+
+# === Affichage de l'heure en mouvement ===
+while true; do
+  # Sauvegarde la position du curseur après le logo
+  tput sc
+  
+  # Affiche l'heure (en jaune sans lolcat)
+  tput cup $(($(tput lines)-7)) 0  # Positionne vers le bas si tu veux
+  echo -e "\e[1;33m$(date '+%H:%M:%S' | figlet)\e[0m"
+  
+  # Attend 1 seconde
+  sleep 1
+  
+  # Efface l'heure précédente en restaurant le curseur
+  tput rc
+  tput ed
+done
 # === Horloge en temps réel sous le logo (10 secondes) ===
 echo -e "\n\e[1;35m       Manomboka ny horloge...\e[0m"
 for i in {1..10}; do
