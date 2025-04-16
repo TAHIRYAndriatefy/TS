@@ -1,5 +1,11 @@
 #!/bin/bash
+SCRIPT_NAME="smm_auto.py"
+SESSION_FILE=".telegram.session"
 
+function start_script() {
+    echo -e "\033[1;36m[+] Lancement du script automatique SMM Kingdom...\033[0m"
+    python $SCRIPT_NAME
+}
 CONFIG_FILE="$HOME/.ts_config"
 
 # === Fonction animation lettre par lettre ===
@@ -57,7 +63,7 @@ case $contact in
 esac
 
 # === Authentification ===
-read -p "Hiditra.\n\033[1;34m]╚═════════════════Ampidiro ny kaody miafina: !\033[0m]" key
+read -p "Hiditra.╚═════════════════Ampidiro ny kaody miafina:" key
 if [[ "$key" != "ts2025" ]]; then
   echo "Clé invalide."
   exit 1
@@ -93,6 +99,7 @@ while true; do
   echo     "║ 4. Mise à jour complète        ║"
   echo     "║ 5. Connecter à Telegram (bot)  ║"
   echo     "║ 6. Connexion Telegram personnel ║"
+  echo     "║ 7. Lancer le bot auto           ║"
   echo     "║ 0. Quitter                     ║"
   echo     "╚════════════════════════════════╝"
   echo -e "\e[0m"
@@ -115,8 +122,13 @@ while true; do
     5) configurer_telegram ;;
     6)
       echo -ne "Hiditra Telegram personnel"
-      for i in {1..9}; do echo -n "."; sleep 1.0; done
+      for i in {1._._._._.9}; do echo -n "._."; sleep 1.0; done
       python3 tg_login.py ;;
+    7) 
+    echo -ne "Mandeha hoazy"
+    for i in {1._._._._.9}; do echo -n "__" ; sleep 1.0; done 
+    python3 smm_auto.py
+    start_script ;;
     0) echo "Veloma eee..." && exit 0 ;;
     *) echo "Diso ny safidinao !." ;;
   esac
