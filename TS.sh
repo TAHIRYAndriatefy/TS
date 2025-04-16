@@ -1,12 +1,5 @@
 #!/bin/bash
-SCRIPT_NAME="smm_auto.py"
-SESSION_FILE=".telegram.session"
 
-function start_script() {
-    echo -e "\033[1;36m[+] Lancement du script automatique SMM Kingdom...\033[0m"
-    python $SCRIPT_NAME
-}
-CONFIG_FILE="$HOME/.ts_config"
 
 # === Fonction animation lettre par lettre ===
 print_slow() {
@@ -47,10 +40,10 @@ echo -e "\e[1;33m"
 echo        "╔════════════════════════════════╗"
 echo        "║       CONTACT DÉVELOPPEUR      ║"
 echo        "╠════════════════════════════════╣"
-echo        "║ [1] 📱 Facebook 1                 ║"
-echo        "║ [2] 📱 Facebook 2                 ║"
-echo        "║ [3] ☎️ Email                      ║"
-echo        "║ [0] ↩️ Ignorer                    ║"
+echo        "║ [1] 📱 Facebook 1              ║"
+echo        "║ [2] 📱 Facebook 2             ║"
+echo        "║ [3] ☎️  Email                  ║"
+echo        "║ [0] ↩️  Ignorer                ║"
 echo        "╚════════════════════════════════╝"
 echo -e "\e[0m"
 read -p "Misafidiana isa mba hidirana : " contact
@@ -71,14 +64,22 @@ if [[ "$key" != "ts2027" ]]; then
   exit 1
 fi
   
-[[ -f $CONFIG_FILE ]] && source "$CONFIG_FILE"
+SCRIPT1_NAME="smm_auto.py"
+SESSION1_FILE=".telegram.session"
 
+function start_script() {
+    echo -e "\033[1;36m[+] Lancement du script automatique SMM Kingdom...\033[0m"
+    python $SCRIPT1_NAME
+}
+CONFIG1_FILE="$HOME/.ts_config"
+
+[[ -f $CONFIG2_FILE ]] && source "$CONFIG2_FILE"
 configurer_telegram() {
   echo -e "\nConfiguration du compte Telegram :"
   read -p "Entrer votre bot token Telegram : " TELEGRAM_TOKEN
   read -p "Entrer votre chat ID Telegram : " TELEGRAM_ID
-  echo "TELEGRAM_TOKEN=\"$TELEGRAM_TOKEN\"" > "$CONFIG_FILE"
-  echo "TELEGRAM_ID=\"$TELEGRAM_ID\"" >> "$CONFIG_FILE"
+  echo "TELEGRAM_TOKEN=\"$TELEGRAM_TOKEN\"" > "$CONFIG2_FILE"
+  echo "TELEGRAM_ID=\"$TELEGRAM_ID\"" >> "$CONFIG2_FILE"
   echo -e "\n[✓] Tafiditra soamatsara ilay momba !"
 }
 
@@ -100,7 +101,7 @@ while true; do
   echo     "║ 3. Mise à jour rapide          ║"
   echo     "║ 4. Mise à jour complète        ║"
   echo     "║ 5. Connecter à Telegram (bot)  ║"
-  echo     "║ 6. Connexion Telegram personnel ║"
+  echo     "║ 6. Connexion Telegram personnel║"
   echo     "║ 7. Lancer le bot auto           ║"
   echo     "║ 0. Quitter                     ║"
   echo     "╚════════════════════════════════╝"
@@ -126,14 +127,12 @@ while true; do
     5) configurer_telegram ;;
     6)
       echo -ne "Hiditra Telegram personnel"
-      for i in {1._._._._.9}; do echo -n "._."; sleep 1.0; done
+      for i in {1...9}; do echo -n ".."; sleep 1.0; done
       python3 tg_login.py ;;
-    7)read -p "mandeha hoazy : " cmd
-    echo "[$(date '+%H:%M:%S')] $cmd" >> ts_history.log
+    7)
     echo -ne "Mandeha hoazy"
-    for i in {1._._._._.9}; do echo -n "__" ; sleep 1.0; done 
-    python3 smm_auto.py
-    start_script ;;
+    for i in {1...9}; do echo -n "." ; sleep 1.0; done 
+    python3 smm_auto.py ;;
     0) echo "Veloma eee..." && exit 0 ;;
     *) echo "❌ Diso ny safidinao !." ;;
   esac
