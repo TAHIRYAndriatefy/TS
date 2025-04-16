@@ -35,32 +35,11 @@ logo=(
              amin'ny termux"
 "           ╚════════════════════════════════╝"
 )
-
 clear
 for line in "${logo[@]}"; do
   echo -e "\e[1;36m$line\e[0m"
   sleep 0.03
 done
-
-# === Fonction pour espacer l'heure ===
-afficher_heure_stylée() {
-  heure=$(date '+%H')
-  minute=$(date '+%M')
-  seconde=$(date '+%S')
-  espace="     " # espace large entre les blocs
-
-  tput cup $(($(tput lines)-14)) 0
-  echo -e "\e[1;33m$(figlet "$heure$espace:$espace$minute$espace:$espace$seconde")\e[0m"
-}
-
-# === Démarrer horloge animée en arrière-plan ===
-while true; do
-  tput sc
-  afficher_heure_stylée
-  sleep 1
-  tput rc
-  tput ed
-done &
 
 # === Menu Contact juste après horloge ===
 sleep 1
