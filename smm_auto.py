@@ -3,18 +3,28 @@ from telethon.tl.functions.messages import GetHistoryRequest
 import time
 import os
 
-# Configuration utilisateur
-api_id = 22121656  # Remplacez par votre API ID
-api_hash = '2f92474dd31878529f02526f7180d624'  # Remplacez par votre API Hash
-phone_number = '+261xxxxxxxxx'
-
+# === Connexion utilisateur ===
+api_id = 22121656
+api_hash = '2f92474dd31878529f02526f7180d624'
+phone_number = input("Numéro de téléphone Telegram (+261...): ")
 bot_username = 'SmmKingdomTasksBot'
-check_interval = 60  # secondes entre chaque vérification
+check_interval = 60
+
+print("Connexion au bot SMM en cours", end="")
+for _ in range(5):
+    print(".", end="", flush=True)
+    time.sleep(0.5)
+print("\n")
 
 with TelegramClient('smm_session', api_id, api_hash) as client:
     if not client.is_user_authorized():
         client.send_code_request(phone_number)
-        client.sign_in(phone_number, input('Entrez le code Telegram: '))
+        code = input('Entrez le code Telegram: ')
+        try:
+            client.sign_in(phone_number, code)
+        except Exception as e:
+            print(f"Erreur de connexion: {e}")
+            exit()
 
     while True:
         try:

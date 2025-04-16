@@ -14,7 +14,6 @@ print_slow() {
   echo ""
 }
 
-#!/bin/bash
 logo=(
 "           ╔════════════════════════════════╗"
 "           ╚════════════════════════════════╝"
@@ -26,8 +25,8 @@ logo=(
 "                     ╚═╝     ╚══════╝"
 "           ╔════════════════════════════════╗"
 "               TAHIRY TS - Termux Tools"
-"            Ity dia outil iray azonao instalé
-                     amin'ny termux"
+"            Ity dia outil iray azonao instalé"
+"                     amin'ny termux"
 "           ╚════════════════════════════════╝"
 )
 clear
@@ -36,15 +35,14 @@ for line in "${logo[@]}"; do
   sleep 0.03
 done
 
-# === Menu Contact juste après horloge ===
+# === Menu Contact juste après intro ===
 sleep 1
 echo -e "\e[1;33m"
 echo        "╔════════════════════════════════╗"
 echo        "║       CONTACT DÉVELOPPEUR      ║"
 echo        "╠════════════════════════════════╣"
 echo        "║ [1] 📱 Facebook 1              ║"
-echo        "║ [2] 📱 Facebook 2    
-  ║"
+echo        "║ [2] 📱 Facebook 2              ║"
 echo        "║ [3]  ☎️ Email                  ║"
 echo        "║ [0]  ↩️ Ignorer                ║"
 echo        "╚════════════════════════════════╝"
@@ -56,39 +54,51 @@ case $contact in
   2) am start -a android.intent.action.VIEW -d "https://www.facebook.com/profile.php?id=61553657020034" >/dev/null 2>&1 ;;
   3) am start -a android.intent.action.SENDTO -d "mailto:tahiryandriatefy52@gmail.com" >/dev/null 2>&1 ;;
   0) echo "Ok, ndao hanohy ..." ;;
-  *) echo "❌ Diso ilay safidinao.fa tsy maninona ndao hotohizana ↩️ " ;;
+  *) echo "❌ Diso ilay safidinao. Fa tsy maninona, ndao hotohizana ↩️" ;;
 esac
 
 # === Authentification ===
-
-read -p "🔐 Apidiro ny kaody miafina ↩️:" key
+read -p "🔐 Apidiro ny kaody miafina ↩️: " key
 if [[ "$key" != "ts2027" ]]; then
-  echo "❌ Clé  diso ilay  kaody  tsindrio ny  CTRL+D "
+  echo "❌ Diso ilay kaody. Tsindrio ny CTRL+D raha hivoaka."
   exit 1
 fi
 
 [[ -f $CONFIG_FILE ]] && source "$CONFIG_FILE"
+
 configurer_telegram() {
   echo -e "\nConfiguration du compte Telegram :"
   read -p "Entrer votre bot token Telegram : " TELEGRAM_TOKEN
   read -p "Entrer votre chat ID Telegram : " TELEGRAM_ID
-  echo "TELEGRAM_TOKEN=\"$TELEGRAM_TOKEN\"" > "$CONFIG2_FILE"
-  echo "TELEGRAM_ID=\"$TELEGRAM_ID\"" >> "$CONFIG2_FILE"
-  echo -e "\n[✓] Tafiditra soamatsara ilay momba !"
+  echo "TELEGRAM_TOKEN=\"$TELEGRAM_TOKEN\"" > "$CONFIG_FILE"
+  echo "TELEGRAM_ID=\"$TELEGRAM_ID\"" >> "$CONFIG_FILE"
+  echo -e "\n[✓] Tafiditra soamantsara ilay configuration !"
 }
 
 mettre_a_jour() {
   echo -e "\n\033[1;34m[~] Manavao ilay script TS izahay...\033[0m"
   cd ~/TS || { echo "Dossier TS introuvable !"; return; }
   git pull && chmod +x TS.sh && cp TS.sh $PREFIX/bin/ts
-  echo -e "\n\033[1;32m ✅ Vita soamatsara ny fanavaozana !\033[0m"
+  echo -e "\n\033[1;32m ✅ Vita soamantsara ny fanavaozana !\033[0m"
   sleep 2
 }
 
-start_script() {
-    echo -e "\033[1;36m[+] Lancement du script automatique SMM Kingdom...\033[0m"
-    python $SCRIPT_NAME
+lancer_telegram_perso() {
+  echo -ne "\033[1;34m[~] Connexion à Telegram personnel en cours"
+  for i in {1..5}; do echo -n "."; sleep 0.5; done
+  echo -e "\n"
+  if [[ -f "tg_login.py" ]]; then
+    python3 tg_login.py
+  else
+    echo "❌ tg_login.py tsy hita. Ataovy azo antoka fa eo amin'ny dossier TS izy."
+  fi
 }
+
+start_script() {
+  echo -e "\033[1;36m[+] Lancement du script automatique SMM Kingdom...\033[0m"
+  python $SCRIPT_NAME
+}
+
 while true; do
   echo -e "\e[1;32m"
   echo     "╔════════════════════════════════╗"
@@ -100,8 +110,7 @@ while true; do
   echo     "║ 4. Mise à jour complète        ║"
   echo     "║ 5. Connecter à Telegram (bot)  ║"
   echo     "║ 6. Connexion Telegram personnel║"
-  echo     "║ 7. Lancer le bot auto  
-    ║"
+  echo     "║ 7. Lancer le bot auto          ║"
   echo     "║ 0. Quitter                     ║"
   echo     "╚════════════════════════════════╝"
   echo -e "\e[0m"
@@ -121,13 +130,10 @@ while true; do
     2) [ -f ts_history.log ] && cat ts_history.log || echo "Aucun historique" ;;
     3) echo "🥰 Mahandrasa kely azafady..." && git pull && chmod +x TS.sh ;;
     4) read -p "mettre à jour : " cmd
-  echo "[$(date '+%H:%M:%S')] $cmd" >> ts_history.log
-    mettre_a_jour ;;
+       echo "[$(date '+%H:%M:%S')] $cmd" >> ts_history.log
+       mettre_a_jour ;;
     5) configurer_telegram ;;
-    6)
-      echo -ne "Hiditra Telegram personnel"
-      for i in {1...9}; do echo -n ".."; sleep 1.0; done
-      python3 tg_login.py ;;
+    6) lancer_telegram_perso ;;
     7) start_script ;;
     0) echo "Veloma eee..." && exit 0 ;;
     *) echo "❌ Diso ny safidinao !." ;;
