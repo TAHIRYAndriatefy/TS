@@ -19,8 +19,7 @@ print_slow() {
   echo ""
 }
 
-# === Animation logo ligne par ligne ===
-clear
+#!/bin/bash
 logo=(
 "           ╔════════════════════════════════╗"
 "           ╚════════════════════════════════╝"
@@ -36,10 +35,63 @@ logo=(
              amin'ny termux"
 "           ╚════════════════════════════════╝"
 )
+
+clear
 for line in "${logo[@]}"; do
   echo -e "\e[1;36m$line\e[0m"
-  sleep 0.1
+  sleep 0.03
 done
+
+# === Fonction pour espacer l'heure ===
+afficher_heure_stylée() {
+  heure=$(date '+%H')
+  minute=$(date '+%M')
+  seconde=$(date '+%S')
+  espace="     " # espace large entre les blocs
+
+  tput cup $(($(tput lines)-14)) 0
+  echo -e "\e[1;33m$(figlet "$heure$espace:$espace$minute$espace:$espace$seconde")\e[0m"
+}
+
+# === Démarrer horloge animée en arrière-plan ===
+while true; do
+  tput sc
+  afficher_heure_stylée
+  sleep 1
+  tput rc
+  tput ed
+done &
+
+# === Menu Contact juste après horloge ===
+sleep 1
+echo -e "\e[1;33m"
+echo        "╔════════════════════════════════╗"
+echo        "║       CONTACT DÉVELOPPEUR      ║"
+echo        "╠════════════════════════════════╣"
+echo        "║ [1] Facebook 1                 ║"
+echo        "║ [2] Facebook 2                 ║"
+echo        "║ [3] Email                      ║"
+echo        "║ [0] Ignorer                    ║"
+echo        "╚════════════════════════════════╝"
+echo -e "\e[0m"
+read -p "Misafidiana isa mba hidirana : " contact
+
+case $contact in
+  1) am start -a android.intent.action.VIEW -d "https://www.facebook.com/profile.php?id=61553579523412" >/dev/null 2>&1 ;;
+  2) am start -a android.intent.action.VIEW -d "https://www.facebook.com/profile.php?id=61553657020034" >/dev/null 2>&1 ;;
+  3) am start -a android.intent.action.SENDTO -d "mailto:tahiryandriatefy52@gmail.com" >/dev/null 2>&1 ;;
+  0) echo "Ok, ndao hanohy ..." ;;
+  *) echo "Diso ilay safidinao.fa tsy maninona ndao hotohizana ..." ;;
+esac
+
+# === Authentification ===
+
+read -p "Hiditra.╚═════════════════Ampidiro ny kaody miafina:" key
+if [[ "$key" != "ts2027" ]]; then
+  echo "Clé invalide."
+  exit 1
+fi
+
 # === Affichage du logo une seule fois ===
 clear
 for line in "${logo[@]}"; do
@@ -76,35 +128,6 @@ for i in {1..10}; do
   sleep 1
 done
 clear
-
-# === Boutons Contact développeur dans un cadre ===
-echo -e "\e[1;33m"
-echo        "╔════════════════════════════════╗"
-echo        "║       CONTACT DÉVELOPPEUR      ║"
-echo        "╠════════════════════════════════╣"
-echo        "║ [1] Facebook 1                 ║"
-echo        "║ [2] Facebook 2                 ║"
-echo        "║ [3] Email                      ║"
-echo        "║ [0] Ignorer                    ║"
-echo        "╚════════════════════════════════╝"
-echo -e "\e[0m"
-read -p "Misafidiana isa mba hidirana : " contact
-
-case $contact in
-  1) am start -a android.intent.action.VIEW -d "https://www.facebook.com/profile.php?id=61553579523412" >/dev/null 2>&1 ;;
-  2) am start -a android.intent.action.VIEW -d "https://www.facebook.com/profile.php?id=61553657020034" >/dev/null 2>&1 ;;
-  3) am start -a android.intent.action.SENDTO -d "mailto:tahiryandriatefy52@gmail.com" >/dev/null 2>&1 ;;
-  0) echo "Ok, ndao hanohy ..." ;;
-  *) echo "Diso ilay safidinao.fa tsy maninona ndao hotohizana ..." ;;
-esac
-
-# === Authentification ===
-
-read -p "Hiditra.╚═════════════════Ampidiro ny kaody miafina:" key
-if [[ "$key" != "ts2025" ]]; then
-  echo "Clé invalide."
-  exit 1
-fi
 
 [[ -f $CONFIG_FILE ]] && source "$CONFIG_FILE"
 
