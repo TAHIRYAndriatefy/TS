@@ -23,9 +23,9 @@ logo=(
 "                     ██║     ███████║"
 "                     ╚═╝     ╚══════╝"
 "           ╔════════════════════════════════╗"
-"                   TAHIRY TS - Termux Tools"
-"           Ity dia outil iray azonao instalé
-             amin'ny termux"
+"               TAHIRY TS - Termux Tools"
+"            Ity dia outil iray azonao instalé
+                     amin'ny termux"
 "           ╚════════════════════════════════╝"
 )
 clear
@@ -41,9 +41,10 @@ echo        "╔═════════════════════�
 echo        "║       CONTACT DÉVELOPPEUR      ║"
 echo        "╠════════════════════════════════╣"
 echo        "║ [1] 📱 Facebook 1              ║"
-echo        "║ [2] 📱 Facebook 2             ║"
-echo        "║ [3] ☎️  Email                  ║"
-echo        "║ [0] ↩️  Ignorer                ║"
+echo        "║ [2] 📱 Facebook 2    
+  ║"
+echo        "║ [3]  ☎️ Email                  ║"
+echo        "║ [0]  ↩️ Ignorer                ║"
 echo        "╚════════════════════════════════╝"
 echo -e "\e[0m"
 read -p "Misafidiana isa mba hidirana : " contact
@@ -102,7 +103,8 @@ while true; do
   echo     "║ 4. Mise à jour complète        ║"
   echo     "║ 5. Connecter à Telegram (bot)  ║"
   echo     "║ 6. Connexion Telegram personnel║"
-  echo     "║ 7. Lancer le bot auto           ║"
+  echo     "║ 7. Lancer le bot auto  
+    ║"
   echo     "║ 0. Quitter                     ║"
   echo     "╚════════════════════════════════╝"
   echo -e "\e[0m"
